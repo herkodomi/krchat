@@ -17,8 +17,10 @@ function App()
 		chatService.addListener( listener );
 		return () => chatService.removeListener( listener );
 	}, [] );
+	Notification.requestPermission();
 	return chatService.inbox ? <Main /> : <Login />
 }
+
 
 
 render( <App />, document.getElementById( 'app' ) );

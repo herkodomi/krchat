@@ -10,4 +10,15 @@ async function impl(e) {
         return networkResponse; // Visszadjuk
     }
 }
+
 self.addEventListener("fetch", e => e.respondWith(impl(e))); // Eseményre feliratkozás
+
+async function push(e) {
+    let message = e.data?.text();
+    if(message != null) {
+        self.registration.showNotification("Chat Notification", {body: message, icon: 'icon.png'});
+        e.waitUntil(Promise.resolve());
+    }
+}
+
+self.addEventListener("push", e => push(e));
